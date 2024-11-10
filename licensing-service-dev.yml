@@ -1,5 +1,6 @@
 example:
-  property: I AM DEV
+  property: I AM DEV FROM GIT
+  property2: UNIQUE TO GIT
 
 spring:
   datasource:
