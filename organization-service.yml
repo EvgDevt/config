@@ -1,6 +1,3 @@
-example:
-  property: I AM DEFAULT FROM GIT
-
 spring:
   jpa:
     database: POSTGRESQL
@@ -14,6 +11,9 @@ spring:
   datasource:
     testWhileIdle: true
     validationQuery: SELECT 1
+
+server:
+  port: 8081
 
 management:
   endpoints:
