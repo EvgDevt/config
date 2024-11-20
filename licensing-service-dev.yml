@@ -7,3 +7,36 @@ spring:
     url: jdbc:postgresql://localhost:5432/ostock_dev
     username: postgres
     password: "{cipher}f45ad77619813b5b3183e49bd63ea099ceb99ec34415ed81b31a4e78408af740"
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        slow-call-rate-threshold: 50
+        slow-call-duration-threshold:
+          seconds: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state:
+          seconds: 10
+  bulkhead:
+    instances:
+      bulkheadLicenseService:
+        max-wait-duration:
+          seconds: 10
+        max-concurrent-calls: 20
+
+  thread-pool-bulkhead:
+    instances:
+      bulkheadLicenseService:
+        max-thread-pool-size: 1
+        core-thread-pool-size: 1
+        queue-capacity: 1
+        keep-alive-duration:
+          seconds: 20
+logging:
+  level:
+    org.springframework.web: WARN
+    com.optimagrowth: DEBUG
